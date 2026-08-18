@@ -1,0 +1,6 @@
+{
+    "yaml.disableSchemaDetection": [],
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/srl-labs/containerlab/main/schemas/clab.schema.json": "file:///c%3A/Users/joaop/OneDrive/Ambiente%20de%20Trabalho/netdevops-lab/topology.clab.yml"
+    }
+}
