@@ -1,0 +1,8 @@
+* text=auto
+
+# FRR and lab files run inside Linux containers, so keep them with LF endings.
+*.yml text eol=lf
+*.yaml text eol=lf
+*.j2 text eol=lf
+configs/** text eol=lf
+ansible/** text eol=lf

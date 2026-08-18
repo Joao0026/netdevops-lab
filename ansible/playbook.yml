@@ -1,0 +1,24 @@
+- name: Generate FRR router configurations
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - vars/routers.yml
+
+  tasks:
+    - name: Ensure router config directories exist
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/../configs/{{ item.key }}"
+        state: directory
+        mode: "0755"
+      loop: "{{ routers | dict2items }}"
+
+    - name: Render FRR config for each router
+      ansible.builtin.template:
+        src: templates/frr.conf.j2
+        dest: "{{ playbook_dir }}/../configs/{{ item.key }}/frr.conf"
+        mode: "0644"
+      loop: "{{ routers | dict2items }}"
+      vars:
+        router_name: "{{ item.key }}"
+        router: "{{ item.value }}"

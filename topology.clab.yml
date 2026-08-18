@@ -9,6 +9,7 @@ topology:
       binds:
         - configs/r1/daemons:/etc/frr/daemons
         - configs/r1/frr.conf:/etc/frr/frr.conf
+        - configs/r1/vtysh.conf:/etc/frr/vtysh.conf
       cap-add:
         - NET_ADMIN
         - NET_RAW
@@ -20,6 +21,7 @@ topology:
       binds:
         - configs/r2/daemons:/etc/frr/daemons
         - configs/r2/frr.conf:/etc/frr/frr.conf
+        - configs/r2/vtysh.conf:/etc/frr/vtysh.conf
       cap-add:
         - NET_ADMIN
         - NET_RAW
@@ -31,6 +33,7 @@ topology:
       binds:
         - configs/r3/daemons:/etc/frr/daemons
         - configs/r3/frr.conf:/etc/frr/frr.conf
+        - configs/r3/vtysh.conf:/etc/frr/vtysh.conf
       cap-add:
         - NET_ADMIN
         - NET_RAW
@@ -42,14 +45,14 @@ topology:
       image: wbitt/network-multitool:alpine-extra
       exec:
         - ip addr add 192.168.1.10/24 dev eth1
-        - ip route add default via 192.168.1.1
+        - ip route replace default via 192.168.1.1
 
     pc3:
       kind: linux
       image: wbitt/network-multitool:alpine-extra
       exec:
         - ip addr add 192.168.3.10/24 dev eth1
-        - ip route add default via 192.168.3.1
+        - ip route replace default via 192.168.3.1
 
   # --- Links: r1-r2-r3 in a triangle so OSPF has a redundant path ---
   links:

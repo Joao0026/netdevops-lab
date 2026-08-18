@@ -1,0 +1,20 @@
+frr version 8.4
+frr defaults traditional
+hostname {{ router_name }}
+log stdout
+!
+{% for interface in router.interfaces %}
+interface {{ interface.name }}
+ ip address {{ interface.ip_address }}
+{% if interface.ospf_network_type is defined %}
+ ip ospf network {{ interface.ospf_network_type }}
+{% endif %}
+!
+{% endfor %}
+router ospf
+ ospf router-id {{ router.router_id }}
+{% for network in router.ospf_networks %}
+ network {{ network }} area 0
+{% endfor %}
+!
+line vty

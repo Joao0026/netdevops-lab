@@ -1,0 +1,41 @@
+# OSPF Failover Test
+
+Timestamp: 2026-08-18 20:29:44 UTC
+Lab: netdevops-lab
+Failed link: r1:eth2
+Traffic test: pc1 -> 192.168.3.10
+Baseline ping before failure: ok
+Ping after restore: ok
+
+Result: traffic recovered after 1.341 seconds.
+
+## Ping Attempts During Failure
+
+- t+1.341s: ok
+
+## Route Before Failure
+
+```text
+Routing entry for 192.168.3.0/24
+  Known via "ospf", distance 110, metric 20, best
+  Last update 00:01:14 ago
+  * 10.0.13.2, via eth2, weight 1
+```
+
+## Route During Failure
+
+```text
+Routing entry for 192.168.3.0/24
+  Known via "ospf", distance 110, metric 30, best
+  Last update 00:00:02 ago
+  * 10.0.12.2, via eth1, weight 1
+```
+
+## Route After Restore
+
+```text
+Routing entry for 192.168.3.0/24
+  Known via "ospf", distance 110, metric 30, best
+  Last update 00:00:08 ago
+  * 10.0.12.2, via eth1, weight 1
+```
